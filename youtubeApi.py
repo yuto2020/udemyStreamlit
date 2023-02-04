@@ -13,6 +13,7 @@ YOUTUBE_API_VERSION = "v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
                 developerKey=DEVELOPER_KEY)
 
+
 def video_search(youtube, q='Python 自動化', max_results=50):
 
     response = youtube.search().list(
@@ -35,6 +36,7 @@ def video_search(youtube, q='Python 自動化', max_results=50):
     df_video = pd.DataFrame(items_id)
 
     return df_video
+
 
 def get_results(df_video, threshold=5000):
     channel_ids = df_video['channel_id'].unique().tolist()
@@ -82,8 +84,9 @@ def get_results(df_video, threshold=5000):
 
     results = pd.merge(left=df_extracted, right=df_videos_info, on='video_id')
     results = results.loc[:, ['video_id', 'title',
-                            'view_count', 'subscriber_count', 'channel_id']]
+                              'view_count', 'subscriber_count', 'channel_id']]
     return results
+
 
 # 画面作成
 st.title('YouTubeAnalytics')
@@ -118,4 +121,4 @@ if st.button('ビデオ表示'):
         try:
             video_field.video(url)
         except:
-            st.error('エラーが発生しました')    
+            st.error('エラーが発生しました')

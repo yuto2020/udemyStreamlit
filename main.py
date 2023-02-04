@@ -1,8 +1,6 @@
 import streamlit as st
 import time
 
-
-
 st.title('Welcome to Streamlit!')
 
 st.write('Show progress bar')
